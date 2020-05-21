@@ -1,0 +1,132 @@
+/* 
+    #dd314b - Bg-color
+    #5b3037 - calendar header
+    #f2acb7 - card bg
+    #e27585 - week days bg
+*/
+
+.wrapper {
+    background-color: #dd314b;
+}
+
+.wrapper .card {
+    background-color: #f2acb7;
+    border: 0px;
+    border-radius: 10px;
+}
+
+.wrapper .card:nth-child(1) {
+    margin-right: 15px;
+}
+
+.wrapper .card:nth-child(2) {
+    padding: 20px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.wrapper .card:nth-child(1) .card-header {
+    margin-bottom: 15px;
+    background-color: #5b3037;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+}
+.wrapper .card:nth-child(1) .card-header .btn-link {
+    color: white;
+}
+.events_block .add_event{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add_event input {
+    border: 0px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+}
+.add_event .btn {
+    background: #5b3037;
+    border: 0;
+    border-radius: 100%;
+    padding: 0;
+    width: 26px;
+    height: 25px;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+table tr {
+    display: flex;
+    padding: 0 10px;
+}
+thead tr {
+    margin-bottom: 20px;
+}
+
+
+td.empty {
+    background: transparent;
+}
+
+.today {
+    background: #5b3037;
+    color: white;
+}
+#events_list {
+    list-style-type: circle;
+    padding-left: 20px;
+    font-size: 14px;
+    max-height: 100px;
+    overflow: auto;
+    position: relative;
+}
+#events_header {
+    font-weight: 500;
+}
+tr td,
+tr th {
+    border-radius: 100%;
+    margin: 5px;
+    font-size: 13px;
+    border: 0px !important;
+    width: 48px;
+    height: 48px;
+    padding: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #e27585;
+    font-weight: normal;
+}
+
+tr td {
+    background: #ffc5ce;
+    color: black;
+}
+
+#events_list::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        flex-direction: column;
+        /* width: 100%; */
+        flex-wrap: wrap;
+    }
+    .wrapper .card:nth-child(1) {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+}

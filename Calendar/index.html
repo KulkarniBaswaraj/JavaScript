@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./CSS/style.css">
+  <title>Calendar</title>
+</head>
+
+<body>
+  <div class="d-flex justify-content-center align-self-center mt-5 p-2">
+    <div class="wrapper d-flex p-4">
+      <div class="card">
+        <div class="card-header text-center">
+          <button class="btn btn-link" onclick="previous()"> <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <span id="monthAndYear"></span>
+          <button class="btn btn-link" onclick="next()"> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <table class="table table-responsive-sm" id="calendar">
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+
+          <tbody id="calendar-body">
+
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="current_day text-center">
+          <h1 class="mb-0"> 02 </h1>
+          <div class="mt-0"> Monday </div>
+        </div>
+        <div class="events_block">
+          <p class="mb-1" id="events_header"> </p>
+          <ul id="events_list">
+          </ul>
+          <div class="add_event">
+            <input type="text" id="event_inp" class="form-control" placeholder="create event">
+            <button class="btn btn-primary ml-2" onclick="addEvents()"> + </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./JS/calendar.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
