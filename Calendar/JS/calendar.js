@@ -6,32 +6,63 @@ let event = {
     list : [],
 }
 
+let prevSelected = null;
+
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let weekDays = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday"
+}
 
 let monthAndYear = document.getElementById("monthAndYear");
 
+document.getElementById('todayDate').innerHTML = new Date().getDate();
+document.getElementById('weekday').innerHTML = weekDays[new Date().getDay()];
+
+
 
 const next = () => {
+    prevSelected = null;
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
     showCalendar(currentMonth, currentYear);
 }
 
 const previous = () => {
+    prevSelected = null;
     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
     showCalendar(currentMonth, currentYear);
 }
 
+addSelectedClass = (e) => {
+    if(typeof e != "string") {
+        if(prevSelected == null) {
+            prevSelected = e.target.dataset.store;
+        } else {
+            const ele = document.querySelector(`td[data-store="${prevSelected}"]`)
+            ele.classList.replace("selected", "prev")
+        }
+        e.target.classList.add('selected')
+        prevSelected = e.target.dataset.store;
+    }
+}
+
 generateList = (events) => {
     let eventsList = '';
+    let selectedDate = event.thisDay;
     if(events.length > 0) {
-        document.getElementById('events_header').innerHTML = 'List of events'
+        document.getElementById('events_header').innerHTML = `List of events ${selectedDate.split("_").join("-")}`
         events.forEach(ev => {
             eventsList += `<li> ${ev} </li>`
         });
     } else {
-        eventsList = `<li> No events found </li>`
+        eventsList = `<li> No events found for <strong> ${selectedDate.split("_").join("-")} </strong></li>`
         document.getElementById('events_header').innerHTML = "";
     }
     document.getElementById('events_list').innerHTML = eventsList;
@@ -39,7 +70,7 @@ generateList = (events) => {
 
 const showEvents = (e = event.thisDay) => {
     event.thisDay = typeof e == "string" ? e : e.target.dataset.store;
-    console.log(event.thisDay);
+    addSelectedClass(e)
     try {
         event.list = JSON.parse(localStorage.getItem(event.thisDay));
         if(Array.isArray(event.list)) {
@@ -104,14 +135,16 @@ const showCalendar = (month, year) => {
             else {
                 let cell = document.createElement("td");
                 let cellText = document.createTextNode(date);
+                const m = month < 10 ? `0${month}` : month;
+                const d = date < 10 ? `0${date}` : date;
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("today");
-                    event.thisDay = `${date}${month}${year}`;
+                    event.thisDay = `${d}_${m}_${year}`;
                     showEvents();
                 } // color today's date
                 cell.appendChild(cellText);
                 cell.addEventListener("click", showEvents);
-                cell.setAttribute('data-store', `${date}${month}${year}`)
+                cell.setAttribute('data-store', `${d}_${m}_${year}`)
                 row.appendChild(cell);
                 date++;
             }
